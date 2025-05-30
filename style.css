@@ -1,0 +1,392 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 10px;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.survey-container {
+    max-width: 700px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#surveyTitle {
+    text-align: center;
+    color: #1d3557;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+legend {
+    font-weight: 600;
+    font-size: 1.5em;
+    color: #1d3557;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e0e0e0;
+    width: 100%;
+    text-align: center;
+}
+
+.question-group {
+    margin-bottom: 25px;
+}
+
+.main-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #495057;
+    font-size: 1.05em;
+}
+
+.required-asterisk {
+    color: #e63946;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+/* Custom Radio Buttons and Checkboxes */
+.radio-button-group label,
+.checkbox-button-group label {
+    display: block; 
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.radio-button-group.horizontal-scroll,
+.checkbox-button-group.horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+.radio-button-group.horizontal-scroll label,
+.checkbox-button-group.horizontal-scroll label {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.option-box-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.option-box-group label {
+    flex: 0 1 auto;
+    padding: 8px 12px;
+    margin-bottom: 0;
+    text-align: center;
+    min-width: 60px;
+    font-size: 0.9em;
+}
+
+
+.radio-button-group input[type="radio"],
+.checkbox-button-group input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.radio-button-group label:has(input[type="radio"]:checked),
+.checkbox-button-group label:has(input[type="checkbox"]:checked) {
+    background-color: #d1fae5; 
+    border-color: #10b981;
+    color: #065f46;
+}
+
+.radio-button-group label:hover,
+.checkbox-button-group label:hover {
+    background-color: #e9ecef;
+}
+
+
+/* Styled Select Dropdowns */
+select {
+    width: 100%;
+    padding: 12px 18px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 1em;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.4-5.4-13.2z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    background-size: .65em auto;
+    box-sizing: border-box;
+}
+
+/* Text Inputs */
+input[type="text"] {
+    width: 100%;
+    padding: 12px 18px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* Slider Group Styling */
+.slider-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.slider-group input[type="range"] {
+    flex-grow: 1;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #e9ecef;
+    border-radius: 5px;
+    outline: none;
+}
+
+.slider-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+.slider-group input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+#age_slider::-webkit-slider-thumb { background: #10b981; }
+#age_slider::-moz-range-thumb { background: #10b981; }
+
+
+.slider-group input[type="number"] {
+    width: 70px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1em;
+    -moz-appearance: textfield;
+}
+.slider-group input[type="number"]::-webkit-outer-spin-button,
+.slider-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Navigation Buttons */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.navigation-buttons button {
+    padding: 12px 25px;
+    font-size: 1.05em;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.navigation-buttons button:active {
+    transform: translateY(1px);
+}
+
+#prevButton {
+    background-color: #6c757d;
+    color: white;
+}
+#prevButton:hover {
+    background-color: #5a6268;
+}
+
+#nextButton {
+    background-color: #007bff;
+    color: white;
+}
+#nextButton:hover {
+    background-color: #0056b3;
+}
+#submitButton {
+    background-color: #28a745;
+}
+#submitButton:hover {
+    background-color: #218838;
+}
+
+
+/* Conditional Messages */
+.conditional-message {
+    padding: 12px 18px;
+    margin-top: 15px;
+    border-radius: 8px;
+    font-size: 0.95em;
+}
+.stop-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    font-weight: 500;
+}
+.info-message {
+    background-color: #cce5ff;
+    color: #004085;
+    border: 1px solid #b8daff;
+}
+small {
+    display: block;
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 8px;
+}
+
+/* Modal Styling */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    position: relative;
+}
+
+.modal-content h2 {
+    color: #28a745;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.modal-content p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #333;
+}
+#timeTaken {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+.section-intro {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #007bff;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .survey-container {
+        padding: 15px 20px;
+        margin: 10px auto;
+    }
+    legend {
+        font-size: 1.3em;
+    }
+    .main-label {
+        font-size: 1em;
+    }
+    .radio-button-group label,
+    .checkbox-button-group label,
+    select,
+    input[type="text"],
+    .slider-group input[type="number"] {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+    .slider-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .slider-group input[type="range"] {
+        width: 100%;
+    }
+    .slider-group input[type="number"] {
+        width: 100px;
+    }
+    .navigation-buttons button {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+}

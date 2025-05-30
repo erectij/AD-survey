@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atopic Dermatitis Survey</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="survey-container">
+        <h1 id="surveyTitle">Survey</h1>
+        <form id="adSurveyForm">
+
+            <!-- SECTION 1: Background -->
+            <fieldset class="survey-section" data-section-index="0">
+                <legend>Background Information</legend>
+                <!-- ... (Background questions remain the same) ... -->
+                <div class="question-group">
+                    <label class="main-label" for="diagnosed_ad">Have you ever been diagnosed with atopic dermatitis by a physician? <span class="required-asterisk">*</span></label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="diagnosed_ad" value="yes" required><span>Yes</span></label>
+                        <label><input type="radio" name="diagnosed_ad" value="no"><span>No</span></label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label" for="first_symptoms_age">When did you first experience atopic dermatitis symptoms? <span class="required-asterisk">*</span></label>
+                    <select id="first_symptoms_age" name="first_symptoms_age" required>
+                        <option value="" disabled selected>Select age group</option>
+                        <option value="<12">Before or during primary school (≤12 y)</option>
+                        <option value="13-15">During lower secondary school (13-15 y)</option>
+                        <option value="16-19">During upper secondary school (16-19 y)</option>
+                        <option value="20-29">20-29 y</option>
+                        <option value="30-39">30-39 y</option>
+                        <option value="40-49">40-49 y</option>
+                        <option value="50-59">50-59 y</option>
+                        <option value="60-69">60-69 y</option>
+                        <option value="70-79">70-79 y</option>
+                        <option value=">80">80-85 y</option>
+                        <option value=">85">>85 y</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label" for="age">Age <span class="required-asterisk">*</span></label>
+                    <div class="slider-group">
+                        <input type="range" id="age_slider" name="age_slider" min="0" max="100" value="30">
+                        <input type="number" id="age" name="age" min="0" max="100" value="30" required>
+                    </div>
+                    <small>If < 18, survey will stop.</small>
+                </div>
+                <div id="age_stop_message" class="conditional-message stop-message" style="display:none;">
+                    Thank you for your interest. This survey is for individuals aged 18 and older.
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label" for="location">Location (country, kommune):</label>
+                    <input type="text" id="location" name="location" placeholder="e.g., Norway, Oslo">
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label">Gender <span class="required-asterisk">*</span></label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="gender" value="female" required><span>Female</span></label>
+                        <label><input type="radio" name="gender" value="male"><span>Male</span></label>
+                        <label><input type="radio" name="gender" value="non-binary"><span>Non-binary</span></label>
+                    </div>
+                </div>
+
+                <div id="pregnancy_question_group" class="question-group conditional" style="display:none;">
+                    <label class="main-label">Are you pregnant or lactating?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="pregnant" value="yes"><span>Yes</span></label>
+                        <label><input type="radio" name="pregnant" value="no"><span>No</span></label>
+                    </div>
+                    <div id="pregnancy_stop_message" class="conditional-message stop-message" style="display:none;">
+                        Thank you for your interest. Due to the nature of some questions, pregnant or lactating individuals cannot complete this survey at this time.
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label">Smoking <span class="required-asterisk">*</span></label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="smoking" value="yes" required><span>Yes</span></label>
+                        <label><input type="radio" name="smoking" value="no"><span>No</span></label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label" for="weight">Weight (kg)</label>
+                    <div class="slider-group">
+                        <input type="range" id="weight_slider" name="weight_slider" min="20" max="200" value="70" step="0.1">
+                        <input type="number" id="weight" name="weight" min="20" max="200" value="70" step="0.1">
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label" for="height">Height (cm)</label>
+                    <div class="slider-group">
+                        <input type="range" id="height_slider" name="height_slider" min="100" max="250" value="170">
+                        <input type="number" id="height" name="height" min="100" max="250" value="170">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- SECTION 2: Employment -->
+            <fieldset class="survey-section" data-section-index="1" style="display:none;">
+                <legend>Employment</legend>
+                <!-- ... (Employment questions remain the same) ... -->
+                 <div class="question-group">
+                    <label class="main-label" for="current_work_situation">Which of the following best describes your current work situation? <span class="required-asterisk">*</span></label>
+                    <select id="current_work_situation" name="current_work_situation" required>
+                        <option value="" disabled selected>Select situation</option>
+                        <option value="full_time">Working full-time (100%)</option>
+                        <option value="part_time">Working part-time (<100%)</option>
+                        <option value="full_disability">Full disability pension (100%)</option>
+                        <option value="partial_disability">Partial disability pension (50-95%)</option>
+                        <option value="not_working">Not working - other reason</option>
+                    </select>
+                </div>
+
+                <div id="work_part_time_percentage_group" class="question-group conditional" style="display:none;">
+                    <label class="main-label" for="work_part_time_percentage">If working part-time, what percentage of a full-time position do you usually work?</label>
+                    <div class="slider-group">
+                        <input type="range" id="work_part_time_percentage_slider" name="work_part_time_percentage_slider" min="1" max="99" value="50">
+                        <input type="number" id="work_part_time_percentage" name="work_part_time_percentage" min="1" max="99" value="50">
+                    </div>
+                </div>
+
+                <div id="disability_pension_percentage_group" class="question-group conditional" style="display:none;">
+                    <label class="main-label">If on partial disability pension, what percentage disability has been approved?</label>
+                    <div class="radio-button-group option-box-group">
+                        <label><input type="radio" name="disability_pension_percentage" value="50"><span>50%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="55"><span>55%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="60"><span>60%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="65"><span>65%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="70"><span>70%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="75"><span>75%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="80"><span>80%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="85"><span>85%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="90"><span>90%</span></label>
+                        <label><input type="radio" name="disability_pension_percentage" value="95"><span>95%</span></label>
+                    </div>
+                </div>
+
+                <div id="disability_reason_group" class="question-group conditional" style="display:none;">
+                    <label class="main-label">If you receive a disability pension (full or partial), what is the main reason?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="disability_reason" value="ad"><span>Atopic dermatitis</span></label>
+                        <label><input type="radio" name="disability_reason" value="other"><span>Other reason</span></label>
+                    </div>
+                </div>
+
+                <div id="not_working_reason_group" class="question-group conditional" style="display:none;">
+                    <label class="main-label">If you are not working for another reason, please indicate which best applies:</label>
+                    <select id="not_working_reason" name="not_working_reason">
+                        <option value="" disabled selected>Select reason</option>
+                        <option value="pensioner">Pensioner</option>
+                        <option value="student">Student / pupil</option>
+                        <option value="military">Military service</option>
+                        <option value="work_assessment">Work assessment allowance</option>
+                        <option value="job_seeker">Job seeker</option>
+                        <option value="parental_leave">Parental leave</option>
+                        <option value="home_duties">Home duties</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label">Household income (NOK) <span class="required-asterisk">*</span></label>
+                    <select id="household_income" name="household_income" required>
+                        <option value="" disabled selected>Select income range</option>
+                        <option value="<400000">< 400 000 NOK</option>
+                        <option value="400000-599999">400 000 - 599 999 NOK</option>
+                        <option value="600000-799999">600 000 - 799 999 NOK</option>
+                        <option value="800000-1099999">800 000 - 1 099 999 NOK</option>
+                        <option value="1100000-1499999">1 100 000 - 1 499 999 NOK</option>
+                        <option value=">=1500000">≥ 1 500 000 NOK</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- SECTION 3: Treatment Introduction -->
+            <fieldset class="survey-section" data-section-index="2" style="display:none;">
+                <legend>Treatment Introduction</legend>
+                <!-- ... (Treatment Introduction questions remain the same) ... -->
+                <div class="question-group">
+                    <label class="main-label">Have you been to or been referred to a dermatologist for your atopic dermatitis? <span class="required-asterisk">*</span></label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="referred_dermatologist" value="yes" required><span>Yes</span></label>
+                        <label><input type="radio" name="referred_dermatologist" value="no"><span>No</span></label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label">Have you ever received treatment for AD? <span class="required-asterisk">*</span></label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" id="ever_treated_ad_yes" name="ever_treated_ad" value="yes" required><span>Yes</span></label>
+                        <label><input type="radio" id="ever_treated_ad_no" name="ever_treated_ad" value="no"><span>No</span></label>
+                    </div>
+                </div>
+                 <div id="skip_treatment_message" class="conditional-message info-message" style="display:none;">
+                    You will now skip detailed treatment questions as you indicated no prior treatment for AD.
+                </div>
+            </fieldset>
+            
+            <!-- SECTION 4: Current Treatment -->
+            <fieldset class="survey-section treatment-details-section" data-section-index="3" style="display:none;">
+                <legend>Current Treatment</legend>
+                <!-- ... (Current Treatment questions remain the same) ... -->
+                 <div class="question-group">
+                    <label class="main-label" for="first_treatment_age">When did you first receive treatment for AD?</label>
+                     <select id="first_treatment_age" name="first_treatment_age">
+                        <option value="" disabled selected>Select age group</option>
+                        <option value="<12">Before or during primary school (≤12 y)</option>
+                        <option value="13-15">During lower secondary school (13-15 y)</option>
+                        <option value="16-19">During upper secondary school (16-19 y)</option>
+                        <option value="20-29">20-29 y</option>
+                        <option value="30-39">30-39 y</option>
+                        <option value="40-49">40-49 y</option>
+                        <option value="50-59">50-59 y</option>
+                        <option value="60-69">60-69 y</option>
+                        <option value="70-79">70-79 y</option>
+                        <option value=">80">80-85 y</option>
+                        <option value=">85">>85 y</option>
+                    </select>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label">Are you currently taking oral medication for atopic dermatitis?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="current_oral_med" value="yes"><span>Yes</span></label>
+                        <label><input type="radio" name="current_oral_med" value="no"><span>No</span></label>
+                    </div>
+                </div>
+                <div id="current_oral_med_which_group" class="question-group conditional checkbox-button-group" style="display:none;">
+                    <label class="main-label">Which oral medication(s) are you currently taking? (Select all that apply)</label>
+                    <label><input type="checkbox" name="current_oral_med_which" value="Methotrexate"><span>Methotrexate</span></label>
+                    <label><input type="checkbox" name="current_oral_med_which" value="Cyclosporine (Sandimmun)"><span>Cyclosporine (Sandimmun)</span></label>
+                    <label><input type="checkbox" name="current_oral_med_which" value="Azathioprine (Imurel)"><span>Azathioprine (Imurel)</span></label>
+                    <label><input type="checkbox" name="current_oral_med_which" value="Baricitinib (Olumiant)"><span>Baricitinib (Olumiant)</span></label>
+                    <label><input type="checkbox" name="current_oral_med_which" value="Abrocitinib (Cibinqo)"><span>Abrocitinib (Cibinqo)</span></label>
+                    <label><input type="checkbox" name="current_oral_med_which" value="Upadacitinib (Rinvoq)"><span>Upadacitinib (Rinvoq)</span></label>
+                    <label><input type="checkbox" name="current_oral_med_which" value="Prednisolone"><span>Prednisolone</span></label>
+                    <label><input type="checkbox" name="current_oral_med_which" value="Other oral medication"><span>Other oral medication</span></label>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label">Are you currently receiving injectable treatment for atopic dermatitis?</label>
+                     <div class="radio-button-group">
+                        <label><input type="radio" name="current_injectable_med" value="yes"><span>Yes</span></label>
+                        <label><input type="radio" name="current_injectable_med" value="no"><span>No</span></label>
+                    </div>
+                </div>
+                 <div id="current_injectable_med_which_group" class="question-group conditional checkbox-button-group" style="display:none;">
+                    <label class="main-label">Which injectable treatment(s) are you currently receiving? (Select all that apply)</label>
+                    <label><input type="checkbox" name="current_injectable_med_which" value="Methotrexate autoinjector (Metex / Methofill / Nordimet)"><span>Methotrexate autoinjector</span></label>
+                    <label><input type="checkbox" name="current_injectable_med_which" value="Lebrikizumab (Ebglyss)"><span>Lebrikizumab (Ebglyss)</span></label>
+                    <label><input type="checkbox" name="current_injectable_med_which" value="Dupilumab (Dupixent)"><span>Dupilumab (Dupixent)</span></label>
+                    <label><input type="checkbox" name="current_injectable_med_which" value="Other injectable"><span>Other injectable</span></label>
+                </div>
+                
+                <div class="question-group">
+                    <label class="main-label">Are you currently using topical therapy (creams, ointments, lotions) for atopic dermatitis?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="current_topical_med" value="yes"><span>Yes</span></label>
+                        <label><input type="radio" name="current_topical_med" value="no"><span>No</span></label>
+                    </div>
+                </div>
+                <div id="current_topical_med_which_group" class="question-group conditional checkbox-button-group" style="display:none;">
+                    <label class="main-label">Which topical therapy are you currently using? (Select all that apply)</label>
+                    <label><input type="checkbox" name="current_topical_med_which" value="Topical corticosteroid"><span>Topical corticosteroid</span></label>
+                    <label><input type="checkbox" name="current_topical_med_which" value="Other topical therapy"><span>Other topical therapy</span></label>
+                </div>
+                
+                <div class="question-group">
+                    <label class="main-label">Are you currently receiving phototherapy for atopic dermatitis?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="current_phototherapy" value="yes"><span>Yes</span></label>
+                        <label><input type="radio" name="current_phototherapy" value="no"><span>No</span></label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label">Are you using any other form of treatment (e.g., complementary or alternative remedies)?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="current_other_treatment" value="yes"><span>Yes</span></label>
+                        <label><input type="radio" name="current_other_treatment" value="no"><span>No</span></label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label" for="satisfaction_current_treatment">Are you satisfied with current treatment? (0=Not satisfied, 10=Very satisfied)</label>
+                    <div class="slider-group">
+                         <input type="range" id="satisfaction_current_treatment_slider" name="satisfaction_current_treatment_slider" min="0" max="10" value="5">
+                         <input type="number" id="satisfaction_current_treatment" name="satisfaction_current_treatment" min="0" max="10" value="5">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- SECTION 5: Past Treatment History (Excluding Current) -->
+            <fieldset class="survey-section treatment-details-section" data-section-index="4" style="display:none;">
+                <legend>Past Treatment History (Excluding Current)</legend>
+                <!-- ... (Past Treatment questions remain the same) ... -->
+                <p class="section-intro">This section asks about treatments you have used in the past but are NOT currently using.</p>
+                
+                <div class="question-group">
+                    <label class="main-label">Have you ever taken oral medication for atopic dermatitis (that you are not currently taking)?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="ever_oral_med_past" value="yes"><span>Yes</span></label>
+                        <label><input type="radio" name="ever_oral_med_past" value="no"><span>No</span></label>
+                    </div>
+                </div>
+                <div id="ever_oral_med_which_group" class="question-group conditional checkbox-button-group" style="display:none;">
+                    <label class="main-label">Which past oral medication(s) did you take? (Select all that apply)</label>
+                    <label><input type="checkbox" name="ever_oral_med_which" value="Methotrexate"><span>Methotrexate</span></label>
+                    <label><input type="checkbox" name="ever_oral_med_which" value="Cyclosporine (Sandimmun)"><span>Cyclosporine (Sandimmun)</span></label>
+                    <label><input type="checkbox" name="ever_oral_med_which" value="Azathioprine (Imurel)"><span>Azathioprine (Imurel)</span></label>
+                    <label><input type="checkbox" name="ever_oral_med_which" value="Baricitinib (Olumiant)"><span>Baricitinib (Olumiant)</span></label>
+                    <label><input type="checkbox" name="ever_oral_med_which" value="Abrocitinib (Cibinqo)"><span>Abrocitinib (Cibinqo)</span></label>
+                    <label><input type="checkbox" name="ever_oral_med_which" value="Upadacitinib (Rinvoq)"><span>Upadacitinib (Rinvoq)</span></label>
+                    <label><input type="checkbox" name="ever_oral_med_which" value="Prednisolone"><span>Prednisolone</span></label>
+                    <label><input type="checkbox" name="ever_oral_med_which" value="Other oral medication"><span>Other oral medication</span></label>
+                </div>
+
+                <div class="question-group">
+                    <label class="main-label">Have you ever received injectable treatment for atopic dermatitis (that you are not currently receiving)?</label>
+                    <div class="radio-button-group">
+                       <label><input type="radio" name="ever_injectable_med_past" value="yes"><span>Yes</span></label>
+                       <label><input type="radio" name="ever_injectable_med_past" value="no"><span>No</span></label>
+                   </div>
+               </div>
+               <div id="ever_injectable_med_which_group" class="question-group conditional checkbox-button-group" style="display:none;">
+                   <label class="main-label">Which past injectable treatment(s) did you receive? (Select all that apply)</label>
+                   <label><input type="checkbox" name="ever_injectable_med_which" value="Methotrexate autoinjector (Metex / Methofill / Nordimet)"><span>Methotrexate autoinjector</span></label>
+                   <label><input type="checkbox" name="ever_injectable_med_which" value="Lebrikizumab (Ebglyss)"><span>Lebrikizumab (Ebglyss)</span></label>
+                   <label><input type="checkbox" name="ever_injectable_med_which" value="Dupilumab (Dupixent)"><span>Dupilumab (Dupixent)</span></label>
+                   <label><input type="checkbox" name="ever_injectable_med_which" value="Other injectable"><span>Other injectable</span></label>
+               </div>
+
+               <div class="question-group">
+                    <label class="main-label">Have you ever used topical therapy (creams, ointments, lotions) for atopic dermatitis (that you are not currently using)?</label>
+                    <div class="radio-button-group">
+                       <label><input type="radio" name="ever_topical_med_past" value="yes"><span>Yes</span></label>
+                       <label><input type="radio" name="ever_topical_med_past" value="no"><span>No</span></label>
+                   </div>
+               </div>
+               <div id="ever_topical_med_which_group" class="question-group conditional checkbox-button-group" style="display:none;">
+                   <label class="main-label">Which past topical therapy did you use? (Select all that apply)</label>
+                   <label><input type="checkbox" name="ever_topical_med_which" value="Topical corticosteroid"><span>Topical corticosteroid</span></label>
+                   <label><input type="checkbox" name="ever_topical_med_which" value="Other topical therapy"><span>Other topical therapy</span></label>
+               </div>
+                
+                <div class="question-group">
+                    <label class="main-label">Have you ever received phototherapy for atopic dermatitis (that you are not currently receiving)?</label>
+                     <div class="radio-button-group">
+                       <label><input type="radio" name="ever_phototherapy_past" value="yes"><span>Yes</span></label>
+                       <label><input type="radio" name="ever_phototherapy_past" value="no"><span>No</span></label>
+                   </div>
+                </div>
+                
+                <div class="question-group">
+                    <label class="main-label">Have you ever used any other form of treatment (e.g., complementary or alternative remedies) for atopic dermatitis (that you are not currently using)?</label>
+                    <div class="radio-button-group">
+                       <label><input type="radio" name="ever_other_treatment_past" value="yes"><span>Yes</span></label>
+                       <label><input type="radio" name="ever_other_treatment_past" value="no"><span>No</span></label>
+                   </div>
+                </div>
+
+                 <div class="question-group">
+                    <label class="main-label">Have you ever gone through a period without any treatment for atopic dermatitis?</label>
+                    <div class="radio-button-group">
+                       <label><input type="radio" name="period_no_treatment" value="yes"><span>Yes</span></label>
+                       <label><input type="radio" name="period_no_treatment" value="no"><span>No</span></label>
+                   </div>
+                </div>
+            </fieldset>
+            
+            <!-- SECTION 6: Comorbidities -->
+            <fieldset class="survey-section" data-section-index="5" id="comorbidities_section" style="display:none;">
+                <legend>Comorbidities</legend>
+                <!-- ... (Comorbidities questions remain the same) ... -->
+                <div class="question-group">
+                    <label class="main-label">Do you receive treatment for any of the following? (Select all that apply)</label>
+                    <div class="checkbox-button-group">
+                        <label><input type="checkbox" name="comorbidities_aar" value="asthma"><span>Asthma</span></label>
+                        <label><input type="checkbox" name="comorbidities_aar" value="allergy"><span>Allergy</span></label>
+                        <label><input type="checkbox" name="comorbidities_aar" value="rhinosinusitis"><span>Rhinosinusitis</span></label>
+                    </div>
+                </div>
+                 <div class="question-group">
+                    <label class="main-label">Do you receive treatment for any of the following? (Select all that apply)</label>
+                     <div class="checkbox-button-group">
+                        <label><input type="checkbox" name="comorbidities_dco" value="diabetes"><span>Diabetes</span></label>
+                        <label><input type="checkbox" name="comorbidities_dco" value="cvd"><span>Cardiovascular disease</span></label>
+                        <label><input type="checkbox" name="comorbidities_dco" value="osteoporosis"><span>Osteoporosis</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Do you receive treatment for any of the following? (Select all that apply)</label>
+                    <div class="checkbox-button-group">
+                        <label><input type="checkbox" name="comorbidities_da" value="depression"><span>Depression</span></label>
+                        <label><input type="checkbox" name="comorbidities_da" value="adhd"><span>ADHD</span></label>
+                        <label><input type="checkbox" name="comorbidities_da" value="anxiety"><span>Anxiety</span></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- SECTION 7: Disease Severity -->
+            <fieldset class="survey-section" data-section-index="6" style="display:none;">
+                <legend>Disease Severity</legend>
+                <!-- ... (Disease Severity questions remain the same) ... -->
+                <div class="question-group">
+                    <label class="main-label" for="body_coverage_ad">How much of your body is covered by AD?</label>
+                    <select id="body_coverage_ad" name="body_coverage_ad">
+                        <option value="" disabled selected>Select percentage</option>
+                        <option value="0-10">0-10%</option>
+                        <option value="11-30">11-30%</option>
+                        <option value="31-60">31-60%</option>
+                        <option value="61-90">61-90%</option>
+                        <option value="91-100">91-100%</option>
+                    </select>
+                </div>
+                <div class="question-group">
+                    <label class="main-label" for="days_symptoms_bothered">How many days within the last week have your symptoms bothered you?</label>
+                    <div class="slider-group">
+                         <input type="range" id="days_symptoms_bothered_slider" name="days_symptoms_bothered_slider" min="0" max="7" value="0">
+                         <input type="number" id="days_symptoms_bothered" name="days_symptoms_bothered" min="0" max="7" value="0">
+                    </div>
+                </div>
+                 <div class="question-group">
+                    <label class="main-label" for="itch_rating_24h">On a scale of 0 to 10 (0=no itch, 10=worst imaginable itch), rate your worst itch in the past 24 hours.</label>
+                    <div class="slider-group">
+                         <input type="range" id="itch_rating_24h_slider" name="itch_rating_24h_slider" min="0" max="10" value="0">
+                         <input type="number" id="itch_rating_24h" name="itch_rating_24h" min="0" max="10" value="0">
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label" for="itch_interfere_sleep">To what extent did itching interfere with sleep last night? (0=not at all, 4=extremely)</label>
+                     <div class="slider-group">
+                         <input type="range" id="itch_interfere_sleep_slider" name="itch_interfere_sleep_slider" min="0" max="4" value="0">
+                         <input type="number" id="itch_interfere_sleep" name="itch_interfere_sleep" min="0" max="4" value="0">
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">What body parts are affected by atopic dermatitis? (Select all that apply)</label>
+                    <div class="checkbox-button-group">
+                        <label><input type="checkbox" name="affected_body_parts" value="head_neck"><span>Head and neck</span></label>
+                        <label><input type="checkbox" name="affected_body_parts" value="arms"><span>Arms</span></label>
+                        <label><input type="checkbox" name="affected_body_parts" value="trunk"><span>Trunk</span></label>
+                        <label><input type="checkbox" name="affected_body_parts" value="legs"><span>Legs</span></label>
+                        <label><input type="checkbox" name="affected_body_parts" value="genitals"><span>Genitals</span></label>
+                        <label><input type="checkbox" name="affected_body_parts" value="hands"><span>Hands</span></label>
+                    </div>
+                </div>
+            </fieldset>
+            
+            <!-- SECTION 8: DLQI (Updated to Radio Buttons) -->
+            <fieldset class="survey-section" data-section-index="7" style="display:none;">
+                <legend>DLQI (Dermatology Life Quality Index)</legend>
+                <p class="section-intro">These questions are about how your skin has been over the last week.</p>
+                 <div class="question-group">
+                    <label class="main-label">Over the last week, how itchy, sore, painful or stinging has your skin been?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_itchy_sore" value="3"><span>Very much</span></label>
+                        <label><input type="radio" name="dlqi_itchy_sore" value="2"><span>A lot</span></label>
+                        <label><input type="radio" name="dlqi_itchy_sore" value="1"><span>A little</span></label>
+                        <label><input type="radio" name="dlqi_itchy_sore" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="dlqi_itchy_sore" value="n/a"><span>Not relevant</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Over the last week, how embarrassed or self-conscious have you been because of your skin?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_embarrassed" value="3"><span>Very much</span></label>
+                        <label><input type="radio" name="dlqi_embarrassed" value="2"><span>A lot</span></label>
+                        <label><input type="radio" name="dlqi_embarrassed" value="1"><span>A little</span></label>
+                        <label><input type="radio" name="dlqi_embarrassed" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="dlqi_embarrassed" value="n/a"><span>Not relevant</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Over the last week, how much has your skin interfered with you going shopping or looking after your home or garden?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_shopping_home" value="3"><span>Very much</span></label>
+                        <label><input type="radio" name="dlqi_shopping_home" value="2"><span>A lot</span></label>
+                        <label><input type="radio" name="dlqi_shopping_home" value="1"><span>A little</span></label>
+                        <label><input type="radio" name="dlqi_shopping_home" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="dlqi_shopping_home" value="n/a"><span>Not relevant</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Over the last week, how much has your skin influenced the clothes you wear?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_clothes" value="3"><span>Very much</span></label>
+                        <label><input type="radio" name="dlqi_clothes" value="2"><span>A lot</span></label>
+                        <label><input type="radio" name="dlqi_clothes" value="1"><span>A little</span></label>
+                        <label><input type="radio" name="dlqi_clothes" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="dlqi_clothes" value="n/a"><span>Not relevant</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Over the last week, how much has your skin affected any social or leisure activities?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_social_leisure" value="3"><span>Very much</span></label>
+                        <label><input type="radio" name="dlqi_social_leisure" value="2"><span>A lot</span></label>
+                        <label><input type="radio" name="dlqi_social_leisure" value="1"><span>A little</span></label>
+                        <label><input type="radio" name="dlqi_social_leisure" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="dlqi_social_leisure" value="n/a"><span>Not relevant</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Over the last week, how much has your skin made it difficult for you to do any sport?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_sport" value="3"><span>Very much</span></label>
+                        <label><input type="radio" name="dlqi_sport" value="2"><span>A lot</span></label>
+                        <label><input type="radio" name="dlqi_sport" value="1"><span>A little</span></label>
+                        <label><input type="radio" name="dlqi_sport" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="dlqi_sport" value="n/a"><span>Not relevant (skin no problem with sport)</span></label>
+                    </div>
+                </div>
+                 <div class="question-group">
+                    <label class="main-label">Over the last week, has your skin prevented you from working or studying?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_work_study" value="3"><span>Very much (prevented)</span></label>
+                        <label><input type="radio" name="dlqi_work_study" value="2"><span>A lot (prevented)</span></label>
+                        <label><input type="radio" name="dlqi_work_study" value="1"><span>A little (prevented)</span></label>
+                        <label><input type="radio" name="dlqi_work_study" value="0"><span>Not at all (not prevented)</span></label>
+                        <label><input type="radio" name="dlqi_work_study" value="n/a"><span>Not relevant (not working/studying)</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Over the last week, how much has your skin created problems with your partner or any of your close friends or relatives?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_partner_friends_relatives" value="3"><span>Very much</span></label>
+                        <label><input type="radio" name="dlqi_partner_friends_relatives" value="2"><span>A lot</span></label>
+                        <label><input type="radio" name="dlqi_partner_friends_relatives" value="1"><span>A little</span></label>
+                        <label><input type="radio" name="dlqi_partner_friends_relatives" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="dlqi_partner_friends_relatives" value="n/a"><span>Not relevant</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Over the last week, how much has your skin caused any sexual difficulties?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_sexual_difficulties" value="3"><span>Very much</span></label>
+                        <label><input type="radio" name="dlqi_sexual_difficulties" value="2"><span>A lot</span></label>
+                        <label><input type="radio" name="dlqi_sexual_difficulties" value="1"><span>A little</span></label>
+                        <label><input type="radio" name="dlqi_sexual_difficulties" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="dlqi_sexual_difficulties" value="n/a"><span>Not relevant</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="dlqi_treatment_problem" value="3"><span>Very much a problem</span></label>
+                        <label><input type="radio" name="dlqi_treatment_problem" value="2"><span>A lot of a problem</span></label>
+                        <label><input type="radio" name="dlqi_treatment_problem" value="1"><span>A little bit of a problem</span></label>
+                        <label><input type="radio" name="dlqi_treatment_problem" value="0"><span>Not a problem at all</span></label>
+                        <label><input type="radio" name="dlqi_treatment_problem" value="n/a"><span>Not relevant</span></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- SECTION 9: WHO-5 (Updated to Radio Buttons) -->
+            <fieldset class="survey-section" data-section-index="8" style="display:none;">
+                <legend>WHO-5 (Well-Being Index)</legend>
+                <p class="section-intro">Please indicate for each of the five statements which is closest to how you have been feeling over the last two weeks.</p>
+                 <div class="question-group">
+                    <label class="main-label">I have felt cheerful and in good spirits.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="who5_cheerful" value="5"><span>All of the time</span></label>
+                        <label><input type="radio" name="who5_cheerful" value="4"><span>Most of the time</span></label>
+                        <label><input type="radio" name="who5_cheerful" value="3"><span>More than half of the time</span></label>
+                        <label><input type="radio" name="who5_cheerful" value="2"><span>Less than half of the time</span></label>
+                        <label><input type="radio" name="who5_cheerful" value="1"><span>Some of the time</span></label>
+                        <label><input type="radio" name="who5_cheerful" value="0"><span>At no time</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I have felt calm and relaxed.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="who5_calm_relaxed" value="5"><span>All of the time</span></label>
+                        <label><input type="radio" name="who5_calm_relaxed" value="4"><span>Most of the time</span></label>
+                        <label><input type="radio" name="who5_calm_relaxed" value="3"><span>More than half of the time</span></label>
+                        <label><input type="radio" name="who5_calm_relaxed" value="2"><span>Less than half of the time</span></label>
+                        <label><input type="radio" name="who5_calm_relaxed" value="1"><span>Some of the time</span></label>
+                        <label><input type="radio" name="who5_calm_relaxed" value="0"><span>At no time</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I have felt active and vigorous.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="who5_active_vigorous" value="5"><span>All of the time</span></label>
+                        <label><input type="radio" name="who5_active_vigorous" value="4"><span>Most of the time</span></label>
+                        <label><input type="radio" name="who5_active_vigorous" value="3"><span>More than half of the time</span></label>
+                        <label><input type="radio" name="who5_active_vigorous" value="2"><span>Less than half of the time</span></label>
+                        <label><input type="radio" name="who5_active_vigorous" value="1"><span>Some of the time</span></label>
+                        <label><input type="radio" name="who5_active_vigorous" value="0"><span>At no time</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I woke up feeling fresh and rested.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="who5_fresh_rested" value="5"><span>All of the time</span></label>
+                        <label><input type="radio" name="who5_fresh_rested" value="4"><span>Most of the time</span></label>
+                        <label><input type="radio" name="who5_fresh_rested" value="3"><span>More than half of the time</span></label>
+                        <label><input type="radio" name="who5_fresh_rested" value="2"><span>Less than half of the time</span></label>
+                        <label><input type="radio" name="who5_fresh_rested" value="1"><span>Some of the time</span></label>
+                        <label><input type="radio" name="who5_fresh_rested" value="0"><span>At no time</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">My daily life has been filled with things that interest me.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="who5_daily_life_interest" value="5"><span>All of the time</span></label>
+                        <label><input type="radio" name="who5_daily_life_interest" value="4"><span>Most of the time</span></label>
+                        <label><input type="radio" name="who5_daily_life_interest" value="3"><span>More than half of the time</span></label>
+                        <label><input type="radio" name="who5_daily_life_interest" value="2"><span>Less than half of the time</span></label>
+                        <label><input type="radio" name="who5_daily_life_interest" value="1"><span>Some of the time</span></label>
+                        <label><input type="radio" name="who5_daily_life_interest" value="0"><span>At no time</span></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- SECTION 10: POEM (Updated to Radio Buttons) -->
+            <fieldset class="survey-section" data-section-index="9" style="display:none;">
+                <legend>POEM (Patient-Oriented Eczema Measure)</legend>
+                <p class="section-intro">Over the last week, on how many days...</p>
+                <div class="question-group">
+                    <label class="main-label">...has your skin been itchy because of the eczema?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="poem_itchy_days" value="0"><span>No days</span></label>
+                        <label><input type="radio" name="poem_itchy_days" value="1-2"><span>1-2 days</span></label>
+                        <label><input type="radio" name="poem_itchy_days" value="3-4"><span>3-4 days</span></label>
+                        <label><input type="radio" name="poem_itchy_days" value="5-6"><span>5-6 days</span></label>
+                        <label><input type="radio" name="poem_itchy_days" value="7"><span>Every day</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">...on how many nights has your sleep been disturbed because of the eczema?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="poem_sleep_disturbed_days" value="0"><span>No days</span></label>
+                        <label><input type="radio" name="poem_sleep_disturbed_days" value="1-2"><span>1-2 days</span></label>
+                        <label><input type="radio" name="poem_sleep_disturbed_days" value="3-4"><span>3-4 days</span></label>
+                        <label><input type="radio" name="poem_sleep_disturbed_days" value="5-6"><span>5-6 days</span></label>
+                        <label><input type="radio" name="poem_sleep_disturbed_days" value="7"><span>Every day</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">...has your skin been bleeding because of the eczema?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="poem_bleeding_days" value="0"><span>No days</span></label>
+                        <label><input type="radio" name="poem_bleeding_days" value="1-2"><span>1-2 days</span></label>
+                        <label><input type="radio" name="poem_bleeding_days" value="3-4"><span>3-4 days</span></label>
+                        <label><input type="radio" name="poem_bleeding_days" value="5-6"><span>5-6 days</span></label>
+                        <label><input type="radio" name="poem_bleeding_days" value="7"><span>Every day</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">...has your skin been weeping or oozing clear fluid because of the eczema?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="poem_weeping_days" value="0"><span>No days</span></label>
+                        <label><input type="radio" name="poem_weeping_days" value="1-2"><span>1-2 days</span></label>
+                        <label><input type="radio" name="poem_weeping_days" value="3-4"><span>3-4 days</span></label>
+                        <label><input type="radio" name="poem_weeping_days" value="5-6"><span>5-6 days</span></label>
+                        <label><input type="radio" name="poem_weeping_days" value="7"><span>Every day</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">...has your skin been cracked because of the eczema?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="poem_cracked_days" value="0"><span>No days</span></label>
+                        <label><input type="radio" name="poem_cracked_days" value="1-2"><span>1-2 days</span></label>
+                        <label><input type="radio" name="poem_cracked_days" value="3-4"><span>3-4 days</span></label>
+                        <label><input type="radio" name="poem_cracked_days" value="5-6"><span>5-6 days</span></label>
+                        <label><input type="radio" name="poem_cracked_days" value="7"><span>Every day</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">...has your skin been flaking off because of the eczema?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="poem_flaking_days" value="0"><span>No days</span></label>
+                        <label><input type="radio" name="poem_flaking_days" value="1-2"><span>1-2 days</span></label>
+                        <label><input type="radio" name="poem_flaking_days" value="3-4"><span>3-4 days</span></label>
+                        <label><input type="radio" name="poem_flaking_days" value="5-6"><span>5-6 days</span></label>
+                        <label><input type="radio" name="poem_flaking_days" value="7"><span>Every day</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">...has your skin felt dry or rough because of the eczema?</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="poem_dry_rough_days" value="0"><span>No days</span></label>
+                        <label><input type="radio" name="poem_dry_rough_days" value="1-2"><span>1-2 days</span></label>
+                        <label><input type="radio" name="poem_dry_rough_days" value="3-4"><span>3-4 days</span></label>
+                        <label><input type="radio" name="poem_dry_rough_days" value="5-6"><span>5-6 days</span></label>
+                        <label><input type="radio" name="poem_dry_rough_days" value="7"><span>Every day</span></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- SECTION 11: HADS (Updated to Radio Buttons) -->
+            <fieldset class="survey-section" data-section-index="10" style="display:none;">
+                <legend>HADS (Hospital Anxiety and Depression Scale)</legend>
+                <p class="section-intro">Read each item and select the reply which comes closest to how you have been feeling in the past week.</p>
+                <div class="question-group">
+                    <label class="main-label">I feel tense or 'wound up'.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_tense_wound_up" value="3"><span>Most of the time</span></label>
+                        <label><input type="radio" name="hads_tense_wound_up" value="2"><span>A lot of the time</span></label>
+                        <label><input type="radio" name="hads_tense_wound_up" value="1"><span>From time to time, occasionally</span></label>
+                        <label><input type="radio" name="hads_tense_wound_up" value="0"><span>Not at all</span></label>
+                    </div>
+                </div>
+                 <div class="question-group">
+                    <label class="main-label">I still enjoy the things I used to enjoy.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_enjoy_things" value="0"><span>Definitely as much</span></label>
+                        <label><input type="radio" name="hads_enjoy_things" value="1"><span>Not quite so much</span></label>
+                        <label><input type="radio" name="hads_enjoy_things" value="2"><span>Only a little</span></label>
+                        <label><input type="radio" name="hads_enjoy_things" value="3"><span>Hardly at all</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I get a sort of frightened feeling as if something awful is about to happen.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_frightened_awful" value="3"><span>Very definitely and quite badly</span></label>
+                        <label><input type="radio" name="hads_frightened_awful" value="2"><span>Yes, but not too badly</span></label>
+                        <label><input type="radio" name="hads_frightened_awful" value="1"><span>A little, but it doesn't worry me</span></label>
+                        <label><input type="radio" name="hads_frightened_awful" value="0"><span>Not at all</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I can laugh and see the funny side of things.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_laugh_funny_side" value="0"><span>As much as I always could</span></label>
+                        <label><input type="radio" name="hads_laugh_funny_side" value="1"><span>Not quite so much now</span></label>
+                        <label><input type="radio" name="hads_laugh_funny_side" value="2"><span>Definitely not so much now</span></label>
+                        <label><input type="radio" name="hads_laugh_funny_side" value="3"><span>Not at all</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">Worrying thoughts go through my mind.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_worrying_thoughts" value="3"><span>A great deal of the time</span></label>
+                        <label><input type="radio" name="hads_worrying_thoughts" value="2"><span>A lot of the time</span></label>
+                        <label><input type="radio" name="hads_worrying_thoughts" value="1"><span>From time to time, but not too often</span></label>
+                        <label><input type="radio" name="hads_worrying_thoughts" value="0"><span>Only occasionally</span></label>
+                    </div>
+                </div>
+                 <div class="question-group">
+                    <label class="main-label">I feel cheerful.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_feel_cheerful" value="3"><span>Not at all</span></label>
+                        <label><input type="radio" name="hads_feel_cheerful" value="2"><span>Not often</span></label>
+                        <label><input type="radio" name="hads_feel_cheerful" value="1"><span>Sometimes</span></label>
+                        <label><input type="radio" name="hads_feel_cheerful" value="0"><span>Most of the time</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I can sit at ease and feel relaxed.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_sit_ease_relaxed" value="0"><span>Definitely</span></label>
+                        <label><input type="radio" name="hads_sit_ease_relaxed" value="1"><span>Usually</span></label>
+                        <label><input type="radio" name="hads_sit_ease_relaxed" value="2"><span>Not often</span></label>
+                        <label><input type="radio" name="hads_sit_ease_relaxed" value="3"><span>Not at all</span></label>
+                    </div>
+                </div>
+                 <div class="question-group">
+                    <label class="main-label">I feel as if I am slowed down.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_slowed_down" value="3"><span>Nearly all the time</span></label>
+                        <label><input type="radio" name="hads_slowed_down" value="2"><span>Very often</span></label>
+                        <label><input type="radio" name="hads_slowed_down" value="1"><span>Sometimes</span></label>
+                        <label><input type="radio" name="hads_slowed_down" value="0"><span>Not at all</span></label>
+                    </div>
+                </div>
+                 <div class="question-group">
+                    <label class="main-label">I get a sort of frightened feeling like 'butterflies' in the stomach.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_frightened_butterflies" value="0"><span>Not at all</span></label>
+                        <label><input type="radio" name="hads_frightened_butterflies" value="1"><span>Occasionally</span></label>
+                        <label><input type="radio" name="hads_frightened_butterflies" value="2"><span>Quite often</span></label>
+                        <label><input type="radio" name="hads_frightened_butterflies" value="3"><span>Very often</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I have lost interest in my appearance.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_lost_interest_appearance" value="3"><span>Definitely</span></label>
+                        <label><input type="radio" name="hads_lost_interest_appearance" value="2"><span>I don't take as much care as I should</span></label>
+                        <label><input type="radio" name="hads_lost_interest_appearance" value="1"><span>I may not take quite as much care</span></label>
+                        <label><input type="radio" name="hads_lost_interest_appearance" value="0"><span>I take just as much care as ever</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I feel restless as I have to be on the move.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_restless_on_move" value="3"><span>Very much indeed</span></label>
+                        <label><input type="radio" name="hads_restless_on_move" value="2"><span>Quite a lot</span></label>
+                        <label><input type="radio" name="hads_restless_on_move" value="1"><span>Not very much</span></label>
+                        <label><input type="radio" name="hads_restless_on_move" value="0"><span>Not at all</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I look forward with enjoyment to things.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_look_forward_enjoyment" value="0"><span>As much as I ever did</span></label>
+                        <label><input type="radio" name="hads_look_forward_enjoyment" value="1"><span>Rather less than I used to</span></label>
+                        <label><input type="radio" name="hads_look_forward_enjoyment" value="2"><span>Definitely less than I used to</span></label>
+                        <label><input type="radio" name="hads_look_forward_enjoyment" value="3"><span>Hardly at all</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I get sudden feelings of panic.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_sudden_panic" value="3"><span>Very often indeed</span></label>
+                        <label><input type="radio" name="hads_sudden_panic" value="2"><span>Quite often</span></label>
+                        <label><input type="radio" name="hads_sudden_panic" value="1"><span>Not very often</span></label>
+                        <label><input type="radio" name="hads_sudden_panic" value="0"><span>Not at all</span></label>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label">I can enjoy a good book or radio or TV program.</label>
+                    <div class="radio-button-group">
+                        <label><input type="radio" name="hads_enjoy_book_tv" value="0"><span>Often</span></label>
+                        <label><input type="radio" name="hads_enjoy_book_tv" value="1"><span>Sometimes</span></label>
+                        <label><input type="radio" name="hads_enjoy_book_tv" value="2"><span>Not often</span></label>
+                        <label><input type="radio" name="hads_enjoy_book_tv" value="3"><span>Very seldom</span></label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- SECTION 12: WPAI -->
+            <fieldset class="survey-section" data-section-index="11" style="display:none;">
+                <legend>WPAI (Work Productivity and Activity Impairment)</legend>
+                <!-- ... (WPAI questions remain the same with sliders) ... -->
+                <p class="section-intro">The following questions ask about the effect of your health problems on your ability to work and perform regular activities.</p>
+                 <div class="question-group">
+                    <label class="main-label" for="wpai_missed_work_health">During the past seven days, how many hours did you miss from work because of your health problems?</label>
+                    <div class="slider-group">
+                        <input type="range" id="wpai_missed_work_health_slider" name="wpai_missed_work_health_slider" min="0" max="100" value="0">
+                        <input type="number" id="wpai_missed_work_health" name="wpai_missed_work_health" min="0" max="100" value="0">
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label" for="wpai_missed_work_other">During the past seven days, how many hours did you miss from work because of any other reason (e.g., vacation, holidays)?</label>
+                     <div class="slider-group">
+                        <input type="range" id="wpai_missed_work_other_slider" name="wpai_missed_work_other_slider" min="0" max="100" value="0">
+                        <input type="number" id="wpai_missed_work_other" name="wpai_missed_work_other" min="0" max="100" value="0">
+                    </div>
+                </div>
+                 <div class="question-group">
+                    <label class="main-label" for="wpai_hours_actually_worked">During the past seven days, how many hours did you actually work?</label>
+                    <div class="slider-group">
+                        <input type="range" id="wpai_hours_actually_worked_slider" name="wpai_hours_actually_worked_slider" min="0" max="100" value="0">
+                        <input type="number" id="wpai_hours_actually_worked" name="wpai_hours_actually_worked" min="0" max="100" value="0">
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label" for="wpai_productivity_affected">During the past seven days, how much did your health problems affect your productivity while you were working? (0=not at all, 10=completely affected)</label>
+                    <div class="slider-group">
+                        <input type="range" id="wpai_productivity_affected_slider" name="wpai_productivity_affected_slider" min="0" max="10" value="0">
+                        <input type="number" id="wpai_productivity_affected" name="wpai_productivity_affected" min="0" max="10" value="0">
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label class="main-label" for="wpai_daily_activities_affected">During the past seven days, how much did your health problems affect your ability to do your regular daily activities, other than work at a job? (0=not at all, 10=completely affected)</label>
+                    <div class="slider-group">
+                        <input type="range" id="wpai_daily_activities_affected_slider" name="wpai_daily_activities_affected_slider" min="0" max="10" value="0">
+                        <input type="number" id="wpai_daily_activities_affected" name="wpai_daily_activities_affected" min="0" max="10" value="0">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation-buttons">
+                <button type="button" id="prevButton" style="display:none;">Previous</button>
+                <button type="button" id="nextButton">Next</button>
+                <button type="submit" id="submitButton" style="display:none;">Submit Survey</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Completion Modal -->
+    <div id="completionModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <h2>Survey Completed!</h2>
+            <p>Thank you for participating.</p>
+            <p>Time taken: <span id="timeTaken"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
